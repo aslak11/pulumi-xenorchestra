@@ -99,7 +99,7 @@
         "xenorchestra:index/ResourceSetLimit:ResourceSetLimit": {
             "properties": {
                 "quantity": {
-                    "type": "integer",
+                    "type": "number",
                     "language": {
                         "python": {
                             "mapCase": false
@@ -175,7 +175,7 @@
                     }
                 },
                 "size": {
-                    "type": "integer",
+                    "type": "number",
                     "description": "The size in bytes of the disk.\n",
                     "language": {
                         "python": {
@@ -326,7 +326,7 @@
                     }
                 },
                 "memory": {
-                    "type": "integer",
+                    "type": "number",
                     "language": {
                         "python": {
                             "mapCase": false
@@ -334,7 +334,7 @@
                     }
                 },
                 "memoryUsage": {
-                    "type": "integer",
+                    "type": "number",
                     "language": {
                         "python": {
                             "mapCase": false
@@ -438,7 +438,7 @@
                     }
                 },
                 "cpuCap": {
-                    "type": "integer",
+                    "type": "number",
                     "language": {
                         "python": {
                             "mapCase": false
@@ -446,7 +446,7 @@
                     }
                 },
                 "cpuWeight": {
-                    "type": "integer",
+                    "type": "number",
                     "language": {
                         "python": {
                             "mapCase": false
@@ -586,7 +586,7 @@
                     }
                 },
                 "startDelay": {
-                    "type": "integer",
+                    "type": "number",
                     "language": {
                         "python": {
                             "mapCase": false
@@ -621,7 +621,7 @@
                     }
                 },
                 "videoram": {
-                    "type": "integer",
+                    "type": "number",
                     "language": {
                         "python": {
                             "mapCase": false
@@ -691,7 +691,7 @@
                     }
                 },
                 "size": {
-                    "type": "integer",
+                    "type": "number",
                     "language": {
                         "python": {
                             "mapCase": false
@@ -969,7 +969,7 @@
             }
         },
         "xenorchestra:index/resourceSet:ResourceSet": {
-            "description": "## # xenorchestra.ResourceSet\n\nCreates a Xen Orchestra resource set\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as xenorchestra from \"@pulumi/xenorchestra\";\n\nconst template = pulumi.output(xenorchestra.getTemplate({\n    nameLabel: \"Ubuntu Bionic Beaver 18.04\",\n}));\nconst sr = pulumi.output(xenorchestra.getSr({\n    nameLabel: \"Your storage repository label\",\n}));\nconst eth0 = pulumi.output(xenorchestra.getPif({\n    device: \"eth0\",\n    vlan: -1,\n}));\nconst rs = new xenorchestra.ResourceSet(\"rs\", {\n    limits: [\n        {\n            quantity: 20,\n            type: \"cpus\",\n        },\n        {\n            quantity: 107374182400,\n            type: \"disk\",\n        },\n        {\n            quantity: 12884901888,\n            type: \"memory\",\n        },\n    ],\n    objects: [\n        template.id,\n        sr.id,\n        eth0.network,\n    ],\n    subjects: [\"3b480e98-af4e-4dbf-9f1e-29ac59d6364f\"],\n});\n```\n```python\nimport pulumi\nimport pulumi_xenorchestra as xenorchestra\n\ntemplate = xenorchestra.get_template(name_label=\"Ubuntu Bionic Beaver 18.04\")\nsr = xenorchestra.get_sr(name_label=\"Your storage repository label\")\neth0 = xenorchestra.get_pif(device=\"eth0\",\n    vlan=-1)\nrs = xenorchestra.ResourceSet(\"rs\",\n    limits=[\n        xenorchestra.ResourceSetLimitArgs(\n            quantity=20,\n            type=\"cpus\",\n        ),\n        xenorchestra.ResourceSetLimitArgs(\n            quantity=107374182400,\n            type=\"disk\",\n        ),\n        xenorchestra.ResourceSetLimitArgs(\n            quantity=12884901888,\n            type=\"memory\",\n        ),\n    ],\n    objects=[\n        template.id,\n        sr.id,\n        eth0.network,\n    ],\n    subjects=[\"3b480e98-af4e-4dbf-9f1e-29ac59d6364f\"])\n```\n```csharp\nusing System.Collections.Generic;\nusing Pulumi;\nusing Xenorchestra = Pulumi.Xenorchestra;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var template = Xenorchestra.GetTemplate.Invoke(new()\n    {\n        NameLabel = \"Ubuntu Bionic Beaver 18.04\",\n    });\n\n    var sr = Xenorchestra.GetSr.Invoke(new()\n    {\n        NameLabel = \"Your storage repository label\",\n    });\n\n    var eth0 = Xenorchestra.GetPif.Invoke(new()\n    {\n        Device = \"eth0\",\n        Vlan = -1,\n    });\n\n    var rs = new Xenorchestra.ResourceSet(\"rs\", new()\n    {\n        Limits = new[]\n        {\n            new Xenorchestra.Inputs.ResourceSetLimitArgs\n            {\n                Quantity = 20,\n                Type = \"cpus\",\n            },\n            new Xenorchestra.Inputs.ResourceSetLimitArgs\n            {\n                Quantity = 107374182400,\n                Type = \"disk\",\n            },\n            new Xenorchestra.Inputs.ResourceSetLimitArgs\n            {\n                Quantity = 12884901888,\n                Type = \"memory\",\n            },\n        },\n        Objects = new[]\n        {\n            template.Apply(getTemplateResult =\u003e getTemplateResult.Id),\n            sr.Apply(getSrResult =\u003e getSrResult.Id),\n            eth0.Apply(getPifResult =\u003e getPifResult.Network),\n        },\n        Subjects = new[]\n        {\n            \"3b480e98-af4e-4dbf-9f1e-29ac59d6364f\",\n        },\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi-xenorchestra/sdk/go/xenorchestra\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\ttemplate, err := xenorchestra.GetTemplate(ctx, \u0026GetTemplateArgs{\n\t\t\tNameLabel: \"Ubuntu Bionic Beaver 18.04\",\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tsr, err := xenorchestra.GetSr(ctx, \u0026GetSrArgs{\n\t\t\tNameLabel: \"Your storage repository label\",\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\teth0, err := xenorchestra.GetPif(ctx, \u0026GetPifArgs{\n\t\t\tDevice: \"eth0\",\n\t\t\tVlan:   -1,\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = xenorchestra.NewResourceSet(ctx, \"rs\", \u0026xenorchestra.ResourceSetArgs{\n\t\t\tLimits: ResourceSetLimitArray{\n\t\t\t\t\u0026ResourceSetLimitArgs{\n\t\t\t\t\tQuantity: pulumi.Int(20),\n\t\t\t\t\tType:     pulumi.String(\"cpus\"),\n\t\t\t\t},\n\t\t\t\t\u0026ResourceSetLimitArgs{\n\t\t\t\t\tQuantity: pulumi.Int(107374182400),\n\t\t\t\t\tType:     pulumi.String(\"disk\"),\n\t\t\t\t},\n\t\t\t\t\u0026ResourceSetLimitArgs{\n\t\t\t\t\tQuantity: pulumi.Int(12884901888),\n\t\t\t\t\tType:     pulumi.String(\"memory\"),\n\t\t\t\t},\n\t\t\t},\n\t\t\tObjects: pulumi.StringArray{\n\t\t\t\tpulumi.String(template.Id),\n\t\t\t\tpulumi.String(sr.Id),\n\t\t\t\tpulumi.String(eth0.Network),\n\t\t\t},\n\t\t\tSubjects: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"3b480e98-af4e-4dbf-9f1e-29ac59d6364f\"),\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nResource sets can be imported using the id, e.g. bash\n\n```sh\n $ pulumi import xenorchestra:index/resourceSet:ResourceSet rs MGSpuwnbtUE\n```\n\n ",
+            "description": "## # xenorchestra.ResourceSet\n\nCreates a Xen Orchestra resource set\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as xenorchestra from \"@pulumi/xenorchestra\";\n\nconst template = pulumi.output(xenorchestra.getTemplate({\n    nameLabel: \"Ubuntu Bionic Beaver 18.04\",\n}));\nconst sr = pulumi.output(xenorchestra.getStorageRepository({\n    nameLabel: \"Your storage repository label\",\n}));\nconst eth0 = pulumi.output(xenorchestra.getPif({\n    device: \"eth0\",\n    vlan: -1,\n}));\nconst rs = new xenorchestra.ResourceSet(\"rs\", {\n    limits: [\n        {\n            quantity: 20,\n            type: \"cpus\",\n        },\n        {\n            quantity: 107374182400,\n            type: \"disk\",\n        },\n        {\n            quantity: 12884901888,\n            type: \"memory\",\n        },\n    ],\n    objects: [\n        template.id,\n        sr.id,\n        eth0.network,\n    ],\n    subjects: [\"3b480e98-af4e-4dbf-9f1e-29ac59d6364f\"],\n});\n```\n```python\nimport pulumi\nimport pulumi_xenorchestra as xenorchestra\n\ntemplate = xenorchestra.get_template(name_label=\"Ubuntu Bionic Beaver 18.04\")\nsr = xenorchestra.get_storage_repository(name_label=\"Your storage repository label\")\neth0 = xenorchestra.get_pif(device=\"eth0\",\n    vlan=-1)\nrs = xenorchestra.ResourceSet(\"rs\",\n    limits=[\n        xenorchestra.ResourceSetLimitArgs(\n            quantity=20,\n            type=\"cpus\",\n        ),\n        xenorchestra.ResourceSetLimitArgs(\n            quantity=107374182400,\n            type=\"disk\",\n        ),\n        xenorchestra.ResourceSetLimitArgs(\n            quantity=12884901888,\n            type=\"memory\",\n        ),\n    ],\n    objects=[\n        template.id,\n        sr.id,\n        eth0.network,\n    ],\n    subjects=[\"3b480e98-af4e-4dbf-9f1e-29ac59d6364f\"])\n```\n```csharp\nusing System.Collections.Generic;\nusing Pulumi;\nusing Xenorchestra = Pulumi.Xenorchestra;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var template = Xenorchestra.GetTemplate.Invoke(new()\n    {\n        NameLabel = \"Ubuntu Bionic Beaver 18.04\",\n    });\n\n    var sr = Xenorchestra.GetStorageRepository.Invoke(new()\n    {\n        NameLabel = \"Your storage repository label\",\n    });\n\n    var eth0 = Xenorchestra.GetPif.Invoke(new()\n    {\n        Device = \"eth0\",\n        Vlan = -1,\n    });\n\n    var rs = new Xenorchestra.ResourceSet(\"rs\", new()\n    {\n        Limits = new[]\n        {\n            new Xenorchestra.Inputs.ResourceSetLimitArgs\n            {\n                Quantity = 20,\n                Type = \"cpus\",\n            },\n            new Xenorchestra.Inputs.ResourceSetLimitArgs\n            {\n                Quantity = 107374182400,\n                Type = \"disk\",\n            },\n            new Xenorchestra.Inputs.ResourceSetLimitArgs\n            {\n                Quantity = 12884901888,\n                Type = \"memory\",\n            },\n        },\n        Objects = new[]\n        {\n            template.Apply(getTemplateResult =\u003e getTemplateResult.Id),\n            sr.Apply(getStorageRepositoryResult =\u003e getStorageRepositoryResult.Id),\n            eth0.Apply(getPifResult =\u003e getPifResult.Network),\n        },\n        Subjects = new[]\n        {\n            \"3b480e98-af4e-4dbf-9f1e-29ac59d6364f\",\n        },\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi-xenorchestra/sdk/go/xenorchestra\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\ttemplate, err := xenorchestra.GetTemplate(ctx, \u0026GetTemplateArgs{\n\t\t\tNameLabel: \"Ubuntu Bionic Beaver 18.04\",\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tsr, err := xenorchestra.GetStorageRepository(ctx, \u0026GetStorageRepositoryArgs{\n\t\t\tNameLabel: \"Your storage repository label\",\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\teth0, err := xenorchestra.GetPif(ctx, \u0026GetPifArgs{\n\t\t\tDevice: \"eth0\",\n\t\t\tVlan:   -1,\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = xenorchestra.NewResourceSet(ctx, \"rs\", \u0026xenorchestra.ResourceSetArgs{\n\t\t\tLimits: ResourceSetLimitArray{\n\t\t\t\t\u0026ResourceSetLimitArgs{\n\t\t\t\t\tQuantity: pulumi.Float64(20),\n\t\t\t\t\tType:     pulumi.String(\"cpus\"),\n\t\t\t\t},\n\t\t\t\t\u0026ResourceSetLimitArgs{\n\t\t\t\t\tQuantity: pulumi.Float64(107374182400),\n\t\t\t\t\tType:     pulumi.String(\"disk\"),\n\t\t\t\t},\n\t\t\t\t\u0026ResourceSetLimitArgs{\n\t\t\t\t\tQuantity: pulumi.Float64(12884901888),\n\t\t\t\t\tType:     pulumi.String(\"memory\"),\n\t\t\t\t},\n\t\t\t},\n\t\t\tObjects: pulumi.StringArray{\n\t\t\t\tpulumi.String(template.Id),\n\t\t\t\tpulumi.String(sr.Id),\n\t\t\t\tpulumi.String(eth0.Network),\n\t\t\t},\n\t\t\tSubjects: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"3b480e98-af4e-4dbf-9f1e-29ac59d6364f\"),\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nResource sets can be imported using the id, e.g. bash\n\n```sh\n $ pulumi import xenorchestra:index/resourceSet:ResourceSet rs MGSpuwnbtUE\n```\n\n ",
             "properties": {
                 "limits": {
                     "type": "array",
@@ -1084,10 +1084,10 @@
                     "type": "boolean"
                 },
                 "cpuCap": {
-                    "type": "integer"
+                    "type": "number"
                 },
                 "cpuWeight": {
-                    "type": "integer"
+                    "type": "number"
                 },
                 "cpus": {
                     "type": "integer",
@@ -1160,7 +1160,7 @@
                     "type": "string"
                 },
                 "startDelay": {
-                    "type": "integer",
+                    "type": "number",
                     "description": "Number of seconds the VM should be delayed from starting\n"
                 },
                 "tags": {
@@ -1179,7 +1179,7 @@
                     "description": "The video adapter the VM should use. Possible values include std and cirrus.\n"
                 },
                 "videoram": {
-                    "type": "integer",
+                    "type": "number",
                     "description": "The videoram option the VM should use. Possible values include 1, 2, 4, 8, 16\n"
                 },
                 "waitForIp": {
@@ -1229,10 +1229,10 @@
                     "type": "boolean"
                 },
                 "cpuCap": {
-                    "type": "integer"
+                    "type": "number"
                 },
                 "cpuWeight": {
-                    "type": "integer"
+                    "type": "number"
                 },
                 "cpus": {
                     "type": "integer",
@@ -1287,7 +1287,7 @@
                     "type": "string"
                 },
                 "startDelay": {
-                    "type": "integer",
+                    "type": "number",
                     "description": "Number of seconds the VM should be delayed from starting\n"
                 },
                 "tags": {
@@ -1307,7 +1307,7 @@
                     "description": "The video adapter the VM should use. Possible values include std and cirrus.\n"
                 },
                 "videoram": {
-                    "type": "integer",
+                    "type": "number",
                     "description": "The videoram option the VM should use. Possible values include 1, 2, 4, 8, 16\n"
                 },
                 "waitForIp": {
@@ -1356,10 +1356,10 @@
                         "type": "boolean"
                     },
                     "cpuCap": {
-                        "type": "integer"
+                        "type": "number"
                     },
                     "cpuWeight": {
-                        "type": "integer"
+                        "type": "number"
                     },
                     "cpus": {
                         "type": "integer",
@@ -1432,7 +1432,7 @@
                         "type": "string"
                     },
                     "startDelay": {
-                        "type": "integer",
+                        "type": "number",
                         "description": "Number of seconds the VM should be delayed from starting\n"
                     },
                     "tags": {
@@ -1452,7 +1452,7 @@
                         "description": "The video adapter the VM should use. Possible values include std and cirrus.\n"
                     },
                     "videoram": {
-                        "type": "integer",
+                        "type": "number",
                         "description": "The videoram option the VM should use. Possible values include 1, 2, 4, 8, 16\n"
                     },
                     "waitForIp": {
@@ -1534,10 +1534,10 @@
                         "description": "The provider-assigned unique ID for this managed resource.\n"
                     },
                     "memory": {
-                        "type": "integer"
+                        "type": "number"
                     },
                     "memoryUsage": {
-                        "type": "integer"
+                        "type": "number"
                     },
                     "nameLabel": {
                         "type": "string"
@@ -1743,7 +1743,7 @@
             }
         },
         "xenorchestra:index/getPool:getPool": {
-            "description": "## # xenorchestra.getPool\n\nProvides information about a pool.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as xenorchestra from \"@pulumi/xenorchestra\";\n\nconst pool = xenorchestra.getPool({\n    nameLabel: \"Your pool\",\n});\nconst localStorage = pool.then(pool =\u003e xenorchestra.getSr({\n    nameLabel: \"Your storage repository label\",\n    poolId: pool.id,\n}));\n```\n```python\nimport pulumi\nimport pulumi_xenorchestra as xenorchestra\n\npool = xenorchestra.get_pool(name_label=\"Your pool\")\nlocal_storage = xenorchestra.get_sr(name_label=\"Your storage repository label\",\n    pool_id=pool.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing Pulumi;\nusing Xenorchestra = Pulumi.Xenorchestra;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var pool = Xenorchestra.GetPool.Invoke(new()\n    {\n        NameLabel = \"Your pool\",\n    });\n\n    var localStorage = Xenorchestra.GetSr.Invoke(new()\n    {\n        NameLabel = \"Your storage repository label\",\n        PoolId = pool.Apply(getPoolResult =\u003e getPoolResult.Id),\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi-xenorchestra/sdk/go/xenorchestra\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tpool, err := xenorchestra.GetPool(ctx, \u0026GetPoolArgs{\n\t\t\tNameLabel: \"Your pool\",\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = xenorchestra.GetSr(ctx, \u0026GetSrArgs{\n\t\t\tNameLabel: \"Your storage repository label\",\n\t\t\tPoolId:    pulumi.StringRef(pool.Id),\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.xenorchestra.XenorchestraFunctions;\nimport com.pulumi.xenorchestra.inputs.GetPoolArgs;\nimport com.pulumi.xenorchestra.inputs.GetSrArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var pool = XenorchestraFunctions.getPool(GetPoolArgs.builder()\n            .nameLabel(\"Your pool\")\n            .build());\n\n        final var localStorage = XenorchestraFunctions.getSr(GetSrArgs.builder()\n            .nameLabel(\"Your storage repository label\")\n            .poolId(pool.applyValue(getPoolResult -\u003e getPoolResult.id()))\n            .build());\n\n    }\n}\n```\n```yaml\nvariables:\n  pool:\n    Fn::Invoke:\n      Function: xenorchestra:getPool\n      Arguments:\n        nameLabel: Your pool\n  localStorage:\n    Fn::Invoke:\n      Function: xenorchestra:getSr\n      Arguments:\n        nameLabel: Your storage repository label\n        poolId: ${pool.id}\n```\n{{% /example %}}\n{{% /examples %}}",
+            "description": "## # xenorchestra.getPool\n\nProvides information about a pool.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as xenorchestra from \"@pulumi/xenorchestra\";\n\nconst pool = xenorchestra.getPool({\n    nameLabel: \"Your pool\",\n});\nconst localStorage = pool.then(pool =\u003e xenorchestra.getStorageRepository({\n    nameLabel: \"Your storage repository label\",\n    poolId: pool.id,\n}));\n```\n```python\nimport pulumi\nimport pulumi_xenorchestra as xenorchestra\n\npool = xenorchestra.get_pool(name_label=\"Your pool\")\nlocal_storage = xenorchestra.get_storage_repository(name_label=\"Your storage repository label\",\n    pool_id=pool.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing Pulumi;\nusing Xenorchestra = Pulumi.Xenorchestra;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var pool = Xenorchestra.GetPool.Invoke(new()\n    {\n        NameLabel = \"Your pool\",\n    });\n\n    var localStorage = Xenorchestra.GetStorageRepository.Invoke(new()\n    {\n        NameLabel = \"Your storage repository label\",\n        PoolId = pool.Apply(getPoolResult =\u003e getPoolResult.Id),\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi-xenorchestra/sdk/go/xenorchestra\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tpool, err := xenorchestra.GetPool(ctx, \u0026GetPoolArgs{\n\t\t\tNameLabel: \"Your pool\",\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = xenorchestra.GetStorageRepository(ctx, \u0026GetStorageRepositoryArgs{\n\t\t\tNameLabel: \"Your storage repository label\",\n\t\t\tPoolId:    pulumi.StringRef(pool.Id),\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.xenorchestra.XenorchestraFunctions;\nimport com.pulumi.xenorchestra.inputs.GetPoolArgs;\nimport com.pulumi.xenorchestra.inputs.GetStorageRepositoryArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var pool = XenorchestraFunctions.getPool(GetPoolArgs.builder()\n            .nameLabel(\"Your pool\")\n            .build());\n\n        final var localStorage = XenorchestraFunctions.getStorageRepository(GetStorageRepositoryArgs.builder()\n            .nameLabel(\"Your storage repository label\")\n            .poolId(pool.applyValue(getPoolResult -\u003e getPoolResult.id()))\n            .build());\n\n    }\n}\n```\n```yaml\nvariables:\n  pool:\n    Fn::Invoke:\n      Function: xenorchestra:getPool\n      Arguments:\n        nameLabel: Your pool\n  localStorage:\n    Fn::Invoke:\n      Function: xenorchestra:getStorageRepository\n      Arguments:\n        nameLabel: Your storage repository label\n        poolId: ${pool.id}\n```\n{{% /example %}}\n{{% /examples %}}",
             "inputs": {
                 "description": "A collection of arguments for invoking getPool.\n",
                 "properties": {
@@ -1821,10 +1821,10 @@
                 ]
             }
         },
-        "xenorchestra:index/getSr:getSr": {
-            "description": "## # xenorchestra.getSr\n\nProvides information about a Storage repository to ease the lookup of VM storage information.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as xenorchestra from \"@pulumi/xenorchestra\";\n\nconst localStorage = xenorchestra.getSr({\n    nameLabel: \"Your storage repository label\",\n});\nconst demo_vm = new xenorchestra.Vm(\"demo-vm\", {disks: [{\n    srId: localStorage.then(localStorage =\u003e localStorage.id),\n    nameLabel: \"Ubuntu Bionic Beaver 18.04_imavo\",\n    size: 32212254720,\n}]});\n// ...\n```\n```python\nimport pulumi\nimport pulumi_xenorchestra as xenorchestra\n\nlocal_storage = xenorchestra.get_sr(name_label=\"Your storage repository label\")\ndemo_vm = xenorchestra.Vm(\"demo-vm\", disks=[xenorchestra.VmDiskArgs(\n    sr_id=local_storage.id,\n    name_label=\"Ubuntu Bionic Beaver 18.04_imavo\",\n    size=32212254720,\n)])\n# ...\n```\n```csharp\nusing System.Collections.Generic;\nusing Pulumi;\nusing Xenorchestra = Pulumi.Xenorchestra;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var localStorage = Xenorchestra.GetSr.Invoke(new()\n    {\n        NameLabel = \"Your storage repository label\",\n    });\n\n    var demo_vm = new Xenorchestra.Vm(\"demo-vm\", new()\n    {\n        Disks = new[]\n        {\n            new Xenorchestra.Inputs.VmDiskArgs\n            {\n                SrId = localStorage.Apply(getSrResult =\u003e getSrResult.Id),\n                NameLabel = \"Ubuntu Bionic Beaver 18.04_imavo\",\n                Size = 32212254720,\n            },\n        },\n    });\n\n    // ...\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi-xenorchestra/sdk/go/xenorchestra\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tlocalStorage, err := xenorchestra.GetSr(ctx, \u0026GetSrArgs{\n\t\t\tNameLabel: \"Your storage repository label\",\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = xenorchestra.NewVm(ctx, \"demo-vm\", \u0026xenorchestra.VmArgs{\n\t\t\tDisks: VmDiskArray{\n\t\t\t\t\u0026VmDiskArgs{\n\t\t\t\t\tSrId:      pulumi.String(localStorage.Id),\n\t\t\t\t\tNameLabel: pulumi.String(\"Ubuntu Bionic Beaver 18.04_imavo\"),\n\t\t\t\t\tSize:      pulumi.Int(32212254720),\n\t\t\t\t},\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.xenorchestra.XenorchestraFunctions;\nimport com.pulumi.xenorchestra.inputs.GetSrArgs;\nimport com.pulumi.xenorchestra.Vm;\nimport com.pulumi.xenorchestra.VmArgs;\nimport com.pulumi.xenorchestra.inputs.VmDiskArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var localStorage = XenorchestraFunctions.getSr(GetSrArgs.builder()\n            .nameLabel(\"Your storage repository label\")\n            .build());\n\n        var demo_vm = new Vm(\"demo-vm\", VmArgs.builder()        \n            .disks(VmDiskArgs.builder()\n                .srId(localStorage.applyValue(getSrResult -\u003e getSrResult.id()))\n                .nameLabel(\"Ubuntu Bionic Beaver 18.04_imavo\")\n                .size(32212254720)\n                .build())\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  demo-vm:\n    type: xenorchestra:Vm\n    properties:\n      # ...\n      disks:\n        - srId: ${localStorage.id}\n          nameLabel: Ubuntu Bionic Beaver 18.04_imavo\n          size: 3.221225472e+10\nvariables:\n  localStorage:\n    Fn::Invoke:\n      Function: xenorchestra:getSr\n      Arguments:\n        nameLabel: Your storage repository label\n```\n{{% /example %}}\n{{% /examples %}}",
+        "xenorchestra:index/getStorageRepository:getStorageRepository": {
+            "description": "## # xenorchestra.getStorageRepository\n\nProvides information about a Storage repository to ease the lookup of VM storage information.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as xenorchestra from \"@pulumi/xenorchestra\";\n\nconst localStorage = xenorchestra.getStorageRepository({\n    nameLabel: \"Your storage repository label\",\n});\nconst demo_vm = new xenorchestra.Vm(\"demo-vm\", {disks: [{\n    srId: localStorage.then(localStorage =\u003e localStorage.id),\n    nameLabel: \"Ubuntu Bionic Beaver 18.04_imavo\",\n    size: 32212254720,\n}]});\n// ...\n```\n```python\nimport pulumi\nimport pulumi_xenorchestra as xenorchestra\n\nlocal_storage = xenorchestra.get_storage_repository(name_label=\"Your storage repository label\")\ndemo_vm = xenorchestra.Vm(\"demo-vm\", disks=[xenorchestra.VmDiskArgs(\n    sr_id=local_storage.id,\n    name_label=\"Ubuntu Bionic Beaver 18.04_imavo\",\n    size=32212254720,\n)])\n# ...\n```\n```csharp\nusing System.Collections.Generic;\nusing Pulumi;\nusing Xenorchestra = Pulumi.Xenorchestra;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var localStorage = Xenorchestra.GetStorageRepository.Invoke(new()\n    {\n        NameLabel = \"Your storage repository label\",\n    });\n\n    var demo_vm = new Xenorchestra.Vm(\"demo-vm\", new()\n    {\n        Disks = new[]\n        {\n            new Xenorchestra.Inputs.VmDiskArgs\n            {\n                SrId = localStorage.Apply(getStorageRepositoryResult =\u003e getStorageRepositoryResult.Id),\n                NameLabel = \"Ubuntu Bionic Beaver 18.04_imavo\",\n                Size = 32212254720,\n            },\n        },\n    });\n\n    // ...\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi-xenorchestra/sdk/go/xenorchestra\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tlocalStorage, err := xenorchestra.GetStorageRepository(ctx, \u0026GetStorageRepositoryArgs{\n\t\t\tNameLabel: \"Your storage repository label\",\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = xenorchestra.NewVm(ctx, \"demo-vm\", \u0026xenorchestra.VmArgs{\n\t\t\tDisks: VmDiskArray{\n\t\t\t\t\u0026VmDiskArgs{\n\t\t\t\t\tSrId:      pulumi.String(localStorage.Id),\n\t\t\t\t\tNameLabel: pulumi.String(\"Ubuntu Bionic Beaver 18.04_imavo\"),\n\t\t\t\t\tSize:      pulumi.Float64(32212254720),\n\t\t\t\t},\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.xenorchestra.XenorchestraFunctions;\nimport com.pulumi.xenorchestra.inputs.GetStorageRepositoryArgs;\nimport com.pulumi.xenorchestra.Vm;\nimport com.pulumi.xenorchestra.VmArgs;\nimport com.pulumi.xenorchestra.inputs.VmDiskArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var localStorage = XenorchestraFunctions.getStorageRepository(GetStorageRepositoryArgs.builder()\n            .nameLabel(\"Your storage repository label\")\n            .build());\n\n        var demo_vm = new Vm(\"demo-vm\", VmArgs.builder()        \n            .disks(VmDiskArgs.builder()\n                .srId(localStorage.applyValue(getStorageRepositoryResult -\u003e getStorageRepositoryResult.id()))\n                .nameLabel(\"Ubuntu Bionic Beaver 18.04_imavo\")\n                .size(32212254720)\n                .build())\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  demo-vm:\n    type: xenorchestra:Vm\n    properties:\n      # ...\n      disks:\n        - srId: ${localStorage.id}\n          nameLabel: Ubuntu Bionic Beaver 18.04_imavo\n          size: 3.221225472e+10\nvariables:\n  localStorage:\n    Fn::Invoke:\n      Function: xenorchestra:getStorageRepository\n      Arguments:\n        nameLabel: Your storage repository label\n```\n{{% /example %}}\n{{% /examples %}}",
             "inputs": {
-                "description": "A collection of arguments for invoking getSr.\n",
+                "description": "A collection of arguments for invoking getStorageRepository.\n",
                 "properties": {
                     "nameLabel": {
                         "type": "string"
@@ -1845,7 +1845,7 @@
                 ]
             },
             "outputs": {
-                "description": "A collection of values returned by getSr.\n",
+                "description": "A collection of values returned by getStorageRepository.\n",
                 "properties": {
                     "container": {
                         "type": "string"
@@ -1858,13 +1858,13 @@
                         "type": "string"
                     },
                     "physicalUsage": {
-                        "type": "integer"
+                        "type": "number"
                     },
                     "poolId": {
                         "type": "string"
                     },
                     "size": {
-                        "type": "integer"
+                        "type": "number"
                     },
                     "srType": {
                         "type": "string"
@@ -1876,7 +1876,7 @@
                         }
                     },
                     "usage": {
-                        "type": "integer"
+                        "type": "number"
                     },
                     "uuid": {
                         "type": "string"

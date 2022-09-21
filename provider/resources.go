@@ -140,7 +140,7 @@ func Provider() tfbridge.ProviderInfo {
 			"xenorchestra_pif":          {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getPif")},
 			"xenorchestra_pool":         {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getPool")},
 			"xenorchestra_resource_set": {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getResourceSet")},
-			"xenorchestra_sr":           {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getSr")},
+			"xenorchestra_sr":           {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getStorageRepository")},
 			"xenorchestra_template":     {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getTemplate")},
 			"xenorchestra_user":         {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getUser")},
 			"xenorchestra_vdi":          {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getVdi")},
