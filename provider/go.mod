@@ -3,12 +3,12 @@ module github.com/aslak11/pulumi-xenorchestra/provider
 go 1.18
 
 replace (
-	github.com/aslak11/terraform-provider-xenorchestra/client => ./client
+	github.com/ddelnano/terraform-provider-xenorchestra/client => ./client
 	github.com/hashicorp/terraform-plugin-sdk/v2 => github.com/pulumi/terraform-plugin-sdk/v2 v2.0.0-20220824175045-450992f2f5b9
 )
 
 require (
-	github.com/aslak11/terraform-provider-xenorchestra v0.23.3
+	github.com/ddelnano/terraform-provider-xenorchestra v0.23.3
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.28.1
 	github.com/pulumi/pulumi/sdk/v3 v3.38.0
 )
@@ -45,7 +45,6 @@ require (
 	github.com/apparentlymart/go-cidr v1.1.0 // indirect
 	github.com/apparentlymart/go-textseg/v13 v13.0.0 // indirect
 	github.com/armon/go-radix v1.0.0 // indirect
-	github.com/aslak11/terraform-provider-xenorchestra/client v0.0.0-00010101000000-000000000000 // indirect
 	github.com/aws/aws-sdk-go v1.40.34 // indirect
 	github.com/aws/aws-sdk-go-v2 v1.9.0 // indirect
 	github.com/aws/aws-sdk-go-v2/config v1.7.0 // indirect
@@ -63,6 +62,7 @@ require (
 	github.com/cenkalti/backoff/v3 v3.2.2 // indirect
 	github.com/cheggaaa/pb v1.0.29 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
+	github.com/ddelnano/terraform-provider-xenorchestra/client v0.0.0-00010101000000-000000000000 // indirect
 	github.com/dimchansky/utfbom v1.1.1 // indirect
 	github.com/djherbis/times v1.5.0 // indirect
 	github.com/dustin/go-humanize v1.0.0 // indirect
