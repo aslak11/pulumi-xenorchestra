@@ -54,19 +54,39 @@
         "variables": {
             "insecure": {
                 "type": "boolean",
-                "description": "Whether SSL should be verified or not\n"
+                "description": "Whether SSL should be verified or not\n",
+                "defaultInfo": {
+                    "environment": [
+                        "XOA_INSECURE"
+                    ]
+                }
             },
             "password": {
                 "type": "string",
-                "description": "Password for xoa api\n"
+                "description": "Password for xoa api\n",
+                "defaultInfo": {
+                    "environment": [
+                        "XOA_PASSWORD"
+                    ]
+                }
             },
             "url": {
                 "type": "string",
-                "description": "Hostname of the xoa router\n"
+                "description": "Hostname of the xoa router\n",
+                "defaultInfo": {
+                    "environment": [
+                        "XOA_URL"
+                    ]
+                }
             },
             "username": {
                 "type": "string",
-                "description": "User account for xoa api\n"
+                "description": "User account for xoa api\n",
+                "defaultInfo": {
+                    "environment": [
+                        "XOA_USER"
+                    ]
+                }
             }
         },
         "defaults": [
@@ -810,34 +830,44 @@
                 "description": "User account for xoa api\n"
             }
         },
-        "required": [
-            "password",
-            "url",
-            "username"
-        ],
         "inputProperties": {
             "insecure": {
                 "type": "boolean",
-                "description": "Whether SSL should be verified or not\n"
+                "description": "Whether SSL should be verified or not\n",
+                "defaultInfo": {
+                    "environment": [
+                        "XOA_INSECURE"
+                    ]
+                }
             },
             "password": {
                 "type": "string",
-                "description": "Password for xoa api\n"
+                "description": "Password for xoa api\n",
+                "defaultInfo": {
+                    "environment": [
+                        "XOA_PASSWORD"
+                    ]
+                }
             },
             "url": {
                 "type": "string",
-                "description": "Hostname of the xoa router\n"
+                "description": "Hostname of the xoa router\n",
+                "defaultInfo": {
+                    "environment": [
+                        "XOA_URL"
+                    ]
+                }
             },
             "username": {
                 "type": "string",
-                "description": "User account for xoa api\n"
+                "description": "User account for xoa api\n",
+                "defaultInfo": {
+                    "environment": [
+                        "XOA_USER"
+                    ]
+                }
             }
-        },
-        "requiredInputs": [
-            "password",
-            "url",
-            "username"
-        ]
+        }
     },
     "resources": {
         "xenorchestra:index/acl:Acl": {
