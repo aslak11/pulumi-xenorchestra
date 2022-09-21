@@ -535,7 +535,7 @@
                     }
                 },
                 "memoryMax": {
-                    "type": "integer",
+                    "type": "number",
                     "language": {
                         "python": {
                             "mapCase": false
@@ -1134,7 +1134,7 @@
                     "description": "This is only accessible if guest-tools is installed in the VM and if `wait_for_ip` is set to true. This will contain a list of the ipv6 addresses for the specific network interface. See the example below for more details.\n"
                 },
                 "memoryMax": {
-                    "type": "integer",
+                    "type": "number",
                     "description": "The amount of memory in bytes the VM will have. Updates to this field will cause a stop and start of the VM if the new `memory_max` value is greater than the dynamic memory max. This can be determined with the following command:\n"
                 },
                 "nameDescription": {
@@ -1265,7 +1265,7 @@
                     "description": "This cannot be used with `cdrom`. Possible values are `network` which allows a VM to boot via PXE.\n"
                 },
                 "memoryMax": {
-                    "type": "integer",
+                    "type": "number",
                     "description": "The amount of memory in bytes the VM will have. Updates to this field will cause a stop and start of the VM if the new `memory_max` value is greater than the dynamic memory max. This can be determined with the following command:\n"
                 },
                 "nameDescription": {
@@ -1406,7 +1406,7 @@
                         "description": "This is only accessible if guest-tools is installed in the VM and if `wait_for_ip` is set to true. This will contain a list of the ipv6 addresses for the specific network interface. See the example below for more details.\n"
                     },
                     "memoryMax": {
-                        "type": "integer",
+                        "type": "number",
                         "description": "The amount of memory in bytes the VM will have. Updates to this field will cause a stop and start of the VM if the new `memory_max` value is greater than the dynamic memory max. This can be determined with the following command:\n"
                     },
                     "nameDescription": {
