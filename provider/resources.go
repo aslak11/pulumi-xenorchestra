@@ -19,7 +19,7 @@ import (
 	"path/filepath"
 
 	"github.com/aslak11/pulumi-xenorchestra/provider/pkg/version"
-	xenorchestra "github.com/ddelnano/terraform-provider-xenorchestra/xoa"
+	xenorchestra "github.com/aslak11/terraform-provider-xenorchestra/xoa"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
 	shim "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim"
 	shimv2 "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim/sdk-v2"

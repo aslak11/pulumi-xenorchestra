@@ -1,4 +1,4 @@
-module github.com/ddelnano/terraform-provider-xenorchestra/client
+module github.com/aslak11/terraform-provider-xenorchestra/client
 
 go 1.16
 
