@@ -8,7 +8,7 @@ replace (
 )
 
 require (
-	github.com/aslak11/terraform-provider-xenorchestra v0.23.5
+	github.com/aslak11/terraform-provider-xenorchestra v0.23.7
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.28.1
 	github.com/pulumi/pulumi/sdk/v3 v3.38.0
 )

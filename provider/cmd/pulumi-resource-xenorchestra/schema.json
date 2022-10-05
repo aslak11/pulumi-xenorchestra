@@ -586,7 +586,7 @@
                     }
                 },
                 "startDelay": {
-                    "type": "number",
+                    "type": "integer",
                     "language": {
                         "python": {
                             "mapCase": false
@@ -1160,7 +1160,7 @@
                     "type": "string"
                 },
                 "startDelay": {
-                    "type": "number",
+                    "type": "integer",
                     "description": "Number of seconds the VM should be delayed from starting\n"
                 },
                 "tags": {
@@ -1287,7 +1287,7 @@
                     "type": "string"
                 },
                 "startDelay": {
-                    "type": "number",
+                    "type": "integer",
                     "description": "Number of seconds the VM should be delayed from starting\n"
                 },
                 "tags": {
@@ -1432,7 +1432,7 @@
                         "type": "string"
                     },
                     "startDelay": {
-                        "type": "number",
+                        "type": "integer",
                         "description": "Number of seconds the VM should be delayed from starting\n"
                     },
                     "tags": {
